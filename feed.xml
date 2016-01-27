@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ideas from a passionate software developer</title>
+    <description>Tips from things that I already know and a lot of new discoveries. Ruby, Rails, PostgreSql, React.js, Ember.js and other technologies :)</description>
+    <link>http://alexwbuschle.com/blog/</link>
+    <atom:link href="http://alexwbuschle.com/blog/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Tue, 26 Jan 2016 22:10:47 -0200</pubDate>
+    <lastBuildDate>Tue, 26 Jan 2016 22:10:47 -0200</lastBuildDate>
+    <generator>Jekyll v2.5.3</generator>
+    
+      <item>
+        <title>Testing Ruby on Rails Models - Validators</title>
+        <description>&lt;p&gt;In the rails way of life, all of us developers should test our code, but if you take a look on most of the companies around there, that is not totally true.&lt;/p&gt;
+
+&lt;p&gt;So what you can do to change that? that is simple, &lt;strong&gt;Start creating tests&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://ci.memecdn.com/690/662690.jpg&quot; alt=&quot;You don&#39;t say&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Yup, I know this is a stupid thing to tell, but believe me, one day you will be in a big project with no/really small test suite. Be brave &lt;strong&gt;:P&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;new-projects&quot;&gt;New projects&lt;/h3&gt;
+
+&lt;p&gt;Please, start your project creating tests.
+Doesn’t matter if you’re using TDD, BDD, XYZ, just do it ;)&lt;/p&gt;
+
+&lt;h3 id=&quot;already-runnings-projects&quot;&gt;Already runnings projects&lt;/h3&gt;
+
+&lt;p&gt;You came to a new company and the test suite is very small or doesn’t exist, don’t panic. You’re not going to have a easy path, but you’re not going to die.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Here is my advice:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;You’re starting to understanding the project, so every class that you open, create at least the validations tests (presence, unique, inclusion_of…). If anyone remove a validation by a mistake or not, a test will break and you will know that &lt;strong&gt;;)&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;The next step is to every method that you’re working on, you create a test before touch the code. I like to create a test that will return the expected and others to cover “unexpected” values.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;
+On my small rails todo project, here are the initial tests.
+I have a task.rb and the name and related user are required.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-ruby&quot;&gt;class TaskTest &amp;lt; ActiveSupport::TestCase
+  task = Task.new
+  assert task.invalid?
+  assert task.errors.include?(:name)
+  assert task.errors.include?(:user)
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I started a new object and assert that have at least one error on the required attributes.&lt;/p&gt;
+
+&lt;p&gt;I don’t care which error is being returned, I only care the attribute is not valid.
+Test a specific error became much verbose.&lt;/p&gt;
+
+&lt;p&gt;To make easy to test and make sure a specific attribute is being validated you could use the &lt;a href=&quot;https://github.com/thoughtbot/shoulda-matchers&quot; title=&quot;Github Shoulda Matchers&quot;&gt;gem shoulda matchers&lt;/a&gt;.
+Here is a refactoring using the gem.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-ruby&quot;&gt;class TaskTest &amp;lt; ActiveSupport::TestCase
+  should validate_presence_of(:name)
+  should validate_presence_of(:user)
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Some people will tell: &lt;strong&gt;“Why test validations? Are you testing if the rails validator is working?”&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;For some time I didn’t tested these validator because of that, till one day a validator was removed by mistake and we had a lot of problems u.u&lt;/p&gt;
+
+&lt;p&gt;This is why I like to do these tests ;)&lt;/p&gt;
+
+&lt;p&gt;Rails have a lot of &lt;a href=&quot;http://guides.rubyonrails.org/active_record_validations.html&quot;&gt;validators&lt;/a&gt; that you can use, so keep studying, coding and testing &lt;em&gt;:)&lt;/em&gt;&lt;/p&gt;
+</description>
+        <pubDate>Mon, 18 Jan 2016 19:08:39 -0200</pubDate>
+        <link>http://alexwbuschle.com/blog/testing-ruby-on-rails-models-using-validators</link>
+        <guid isPermaLink="true">http://alexwbuschle.com/blog/testing-ruby-on-rails-models-using-validators</guid>
+        
+        <category>Rails</category>
+        
+        <category>TDD</category>
+        
+        <category>Test</category>
+        
+        
+        <category>rails,</category>
+        
+        <category>tdd</category>
+        
+      </item>
+    
+  </channel>
+</rss>
